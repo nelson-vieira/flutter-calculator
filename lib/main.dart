@@ -65,7 +65,7 @@ class _FlutterCalculatorState extends State<FlutterCalculator> {
                   padding: const EdgeInsets.only(right: 12),
                   child: Text(
                     history,
-                    style: GoogleFonts.rubik(
+                    style: GoogleFonts.ubuntu(
                       textStyle: const TextStyle(
                         fontSize: 25,
                         color: Color(0x66FFFFFF),
@@ -80,7 +80,7 @@ class _FlutterCalculatorState extends State<FlutterCalculator> {
                   padding: const EdgeInsets.all(12),
                   child: Text(
                     operation,
-                    style: GoogleFonts.rubik(
+                    style: GoogleFonts.ubuntu(
                       textStyle: const TextStyle(
                         fontSize: 70,
                         color: Colors.white,
@@ -101,26 +101,26 @@ class _FlutterCalculatorState extends State<FlutterCalculator> {
                 children: <Widget>[
                   CalculatorButton(
                     button: 'AC',
-                    buttonColor: const Color(0x80414141),
-                    charColor: const Color(0xFFDB1C1C),
+                    buttonColor: const Color(0x801E1E1E),
+                    charColor: const Color(0xFFED0C0C),
                     charSize: 30,
                     eventPress: clearEverything,
                   ),
                   CalculatorButton(
                     button: 'C',
-                    buttonColor: const Color(0x80414141),
-                    charColor: const Color(0xFFDB1C1C),
+                    buttonColor: const Color(0x801E1E1E),
+                    charColor: const Color(0xFFED0C0C),
                     eventPress: clearOperation,
                   ),
                   CalculatorButton(
                     button: '%',
-                    buttonColor: const Color(0x80414141),
+                    buttonColor: const Color(0x801E1E1E),
                     charColor: const Color(0xFF3ABF15),
                     eventPress: buttonPressed,
                   ),
                   CalculatorButton(
                     button: '/',
-                    buttonColor: const Color(0x80414141),
+                    buttonColor: const Color(0x801E1E1E),
                     charColor: const Color(0xFF3ABF15),
                     eventPress: buttonPressed,
                   ),
@@ -131,25 +131,25 @@ class _FlutterCalculatorState extends State<FlutterCalculator> {
                 children: [
                   CalculatorButton(
                     button: '7',
-                    buttonColor: const Color(0x80414141),
+                    buttonColor: const Color(0x801E1E1E),
                     charColor: const Color(0xFFFFFFFF),
                     eventPress: buttonPressed,
                   ),
                   CalculatorButton(
                     button: '8',
-                    buttonColor: const Color(0x80414141),
+                    buttonColor: const Color(0x801E1E1E),
                     charColor: const Color(0xFFFFFFFF),
                     eventPress: buttonPressed,
                   ),
                   CalculatorButton(
                     button: '9',
-                    buttonColor: const Color(0x80414141),
+                    buttonColor: const Color(0x801E1E1E),
                     charColor: const Color(0xFFFFFFFF),
                     eventPress: buttonPressed,
                   ),
                   CalculatorButton(
                     button: '*',
-                    buttonColor: const Color(0x80414141),
+                    buttonColor: const Color(0x801E1E1E),
                     charColor: const Color(0xFF3ABF15),
                     eventPress: buttonPressed,
                   ),
@@ -160,25 +160,25 @@ class _FlutterCalculatorState extends State<FlutterCalculator> {
                 children: [
                   CalculatorButton(
                     button: '4',
-                    buttonColor: const Color(0x80414141),
+                    buttonColor: const Color(0x801E1E1E),
                     charColor: const Color(0xFFFFFFFF),
                     eventPress: buttonPressed,
                   ),
                   CalculatorButton(
                     button: '5',
-                    buttonColor: const Color(0x80414141),
+                    buttonColor: const Color(0x801E1E1E),
                     charColor: const Color(0xFFFFFFFF),
                     eventPress: buttonPressed,
                   ),
                   CalculatorButton(
                     button: '6',
-                    buttonColor: const Color(0x80414141),
+                    buttonColor: const Color(0x801E1E1E),
                     charColor: const Color(0xFFFFFFFF),
                     eventPress: buttonPressed,
                   ),
                   CalculatorButton(
                     button: '-',
-                    buttonColor: const Color(0x80414141),
+                    buttonColor: const Color(0x801E1E1E),
                     charColor: const Color(0xFF3ABF15),
                     eventPress: buttonPressed,
                   ),
@@ -189,25 +189,25 @@ class _FlutterCalculatorState extends State<FlutterCalculator> {
                 children: [
                   CalculatorButton(
                     button: '1',
-                    buttonColor: const Color(0x80414141),
+                    buttonColor: const Color(0x801E1E1E),
                     charColor: const Color(0xFFFFFFFF),
                     eventPress: buttonPressed,
                   ),
                   CalculatorButton(
                     button: '2',
-                    buttonColor: const Color(0x80414141),
+                    buttonColor: const Color(0x801E1E1E),
                     charColor: const Color(0xFFFFFFFF),
                     eventPress: buttonPressed,
                   ),
                   CalculatorButton(
                     button: '3',
-                    buttonColor: const Color(0x80414141),
+                    buttonColor: const Color(0x801E1E1E),
                     charColor: const Color(0xFFFFFFFF),
                     eventPress: buttonPressed,
                   ),
                   CalculatorButton(
                     button: '+',
-                    buttonColor: const Color(0x80414141),
+                    buttonColor: const Color(0x801E1E1E),
                     charColor: const Color(0xFF3ABF15),
                     eventPress: buttonPressed,
                   ),
@@ -218,20 +218,20 @@ class _FlutterCalculatorState extends State<FlutterCalculator> {
                 children: [
                   CalculatorButton(
                     button: '0',
-                    buttonColor: const Color(0x80414141),
+                    buttonColor: const Color(0x801E1E1E),
                     charColor: const Color(0xFFFFFFFF),
                     eventPress: buttonPressed,
                   ),
                   CalculatorButton(
                     button: '00',
-                    buttonColor: const Color(0x80414141),
+                    buttonColor: const Color(0x801E1E1E),
                     charColor: const Color(0xFFFFFFFF),
                     charSize: 30,
                     eventPress: buttonPressed,
                   ),
                   CalculatorButton(
                     button: '.',
-                    buttonColor: const Color(0x80414141),
+                    buttonColor: const Color(0x801E1E1E),
                     charColor: const Color(0xFFFFFFFF),
                     eventPress: buttonPressed,
                   ),

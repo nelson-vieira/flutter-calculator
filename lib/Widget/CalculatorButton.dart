@@ -24,19 +24,21 @@ class CalculatorButton extends StatelessWidget {
       child: SizedBox(
         width: 75,
         height: 75,
-        child: FlatButton(
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+        child: TextButton(
+          style: TextButton.styleFrom(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(50.0)),
+            backgroundColor: buttonColor,
+            primary: charColor,
+          ),
           child: Text(
             button,
-            style: GoogleFonts.rubik(
+            style: GoogleFonts.ubuntu(
               textStyle: TextStyle(
                 fontSize: charSize,
               ),
             ),
           ),
-          color: buttonColor,
-          textColor: charColor,
           onPressed: () {
             eventPress(button);
           },
