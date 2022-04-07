@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:math_expressions/math_expressions.dart';
 import 'package:google_fonts/google_fonts.dart';
-import './Widget/CalculatorKeys.dart';
+import 'Widget/CalculatorButton.dart';
 
 void main() {
   runApp(const FlutterCalculator());
@@ -15,61 +15,35 @@ class FlutterCalculator extends StatefulWidget {
 }
 
 class _FlutterCalculatorState extends State<FlutterCalculator> {
-  int firtNum = 0;
-  int secondNum = 0;
   String history = '';
-  String textToDisplay = '';
-  String res = '';
   String operation = '';
 
-  void btnOnClick(String btnVal) {
-    print(btnVal);
-    if (btnVal == 'C') {
-      textToDisplay = '';
-      firtNum = 0;
-      secondNum = 0;
-      res = '';
-    } else if (btnVal == 'AC') {
-      textToDisplay = '';
-      firtNum = 0;
-      secondNum = 0;
-      res = '';
+  void buttonPressed(String button) {
+    setState(() => operation += button);
+  }
+
+  void clearOperation(String button) {
+    setState(() {
+      operation = '';
+    });
+  }
+
+  void clearEverything(String button) {
+    setState(() {
       history = '';
-    } else if (btnVal == '+' ||
-        btnVal == '-' ||
-        btnVal == 'X' ||
-        btnVal == '/') {
-      firtNum = int.parse(textToDisplay);
-      res = '';
-      operation = btnVal;
-    } else if (btnVal == '=') {
-      secondNum = int.parse(textToDisplay);
-      if (operation == '+') {
-        res = (firtNum + secondNum).toString();
-        history =
-            firtNum.toString() + operation.toString() + secondNum.toString();
-      }
-      if (operation == '-') {
-        res = (firtNum - secondNum).toString();
-        history =
-            firtNum.toString() + operation.toString() + secondNum.toString();
-      }
-      if (operation == 'X') {
-        res = (firtNum * secondNum).toString();
-        history =
-            firtNum.toString() + operation.toString() + secondNum.toString();
-      }
-      if (operation == '/') {
-        res = (firtNum / secondNum).toString();
-        history =
-            firtNum.toString() + operation.toString() + secondNum.toString();
-      }
-    } else {
-      res = int.parse(textToDisplay + btnVal).toString();
-    }
+      operation = '';
+    });
+  }
+
+  void calculation(String button) {
+    Parser parser = Parser();
+    Expression expression = parser.parse(operation);
+    ContextModel contextmodel = ContextModel();
 
     setState(() {
-      textToDisplay = res;
+      history = operation;
+      operation =
+          expression.evaluate(EvaluationType.REAL, contextmodel).toString();
     });
   }
 
@@ -80,74 +54,75 @@ class _FlutterCalculatorState extends State<FlutterCalculator> {
       title: 'Flutter Calculator',
       theme: ThemeData(primarySwatch: Colors.blueGrey),
       home: Scaffold(
-        appBar: AppBar(
-          title: Text('Flutter Calculator'),
-        ),
-        backgroundColor: Color(0xFF28527a),
+        backgroundColor: const Color(0xFF000000),
         body: Container(
+          padding: const EdgeInsets.all(12),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
-            children: [
+            children: <Widget>[
               Container(
                 child: Padding(
-                  padding: EdgeInsets.only(right: 12),
+                  padding: const EdgeInsets.only(right: 12),
                   child: Text(
                     history,
                     style: GoogleFonts.rubik(
-                      textStyle: TextStyle(
-                        fontSize: 24,
+                      textStyle: const TextStyle(
+                        fontSize: 25,
                         color: Color(0x66FFFFFF),
                       ),
                     ),
                   ),
                 ),
-                alignment: Alignment(1.0, 1.0),
+                alignment: const Alignment(1.0, 1.0),
               ),
               Container(
                 child: Padding(
-                  padding: EdgeInsets.all(12),
+                  padding: const EdgeInsets.all(12),
                   child: Text(
-                    textToDisplay,
+                    operation,
                     style: GoogleFonts.rubik(
-                      textStyle: TextStyle(
-                        fontSize: 48,
+                      textStyle: const TextStyle(
+                        fontSize: 70,
                         color: Colors.white,
                       ),
                     ),
                   ),
                 ),
-                alignment: Alignment(1.0, 1.0),
+                alignment: const Alignment(1.0, 1.0),
               ),
+              const Divider(
+                color: Color(0xFFABABAB),
+                height: 1,
+                thickness: 1,
+              ),
+              const SizedBox(height: 40),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
+                children: <Widget>[
                   CalculatorButton(
-                    text: 'AC',
-                    fillColor: 0xFF8ac4d0,
-                    textColor: 0xFF000000,
-                    textSize: 20,
-                    callBack: btnOnClick,
+                    button: 'AC',
+                    buttonColor: const Color(0x80414141),
+                    charColor: const Color(0xFFDB1C1C),
+                    charSize: 30,
+                    eventPress: clearEverything,
                   ),
                   CalculatorButton(
-                    text: 'C',
-                    fillColor: 0xFF8ac4d0,
-                    textColor: 0xFF000000,
-                    textSize: 20,
-                    callBack: btnOnClick,
+                    button: 'C',
+                    buttonColor: const Color(0x80414141),
+                    charColor: const Color(0xFFDB1C1C),
+                    eventPress: clearOperation,
                   ),
                   CalculatorButton(
-                    text: '<',
-                    fillColor: 0xFFf4d160,
-                    textColor: 0xFF000000,
-                    textSize: 20,
-                    callBack: btnOnClick,
+                    button: '%',
+                    buttonColor: const Color(0x80414141),
+                    charColor: const Color(0xFF3ABF15),
+                    eventPress: buttonPressed,
                   ),
                   CalculatorButton(
-                    text: '/',
-                    fillColor: 0xFFf4d160,
-                    textColor: 0xFF000000,
-                    textSize: 20,
-                    callBack: btnOnClick,
+                    button: '/',
+                    buttonColor: const Color(0x80414141),
+                    charColor: const Color(0xFF3ABF15),
+                    eventPress: buttonPressed,
                   ),
                 ],
               ),
@@ -155,32 +130,28 @@ class _FlutterCalculatorState extends State<FlutterCalculator> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   CalculatorButton(
-                    text: '9',
-                    fillColor: 0xFF8ac4d0,
-                    textColor: 0xFF000000,
-                    textSize: 20,
-                    callBack: btnOnClick,
+                    button: '7',
+                    buttonColor: const Color(0x80414141),
+                    charColor: const Color(0xFFFFFFFF),
+                    eventPress: buttonPressed,
                   ),
                   CalculatorButton(
-                    text: '8',
-                    fillColor: 0xFF8ac4d0,
-                    textColor: 0xFF000000,
-                    textSize: 20,
-                    callBack: btnOnClick,
+                    button: '8',
+                    buttonColor: const Color(0x80414141),
+                    charColor: const Color(0xFFFFFFFF),
+                    eventPress: buttonPressed,
                   ),
                   CalculatorButton(
-                    text: '7',
-                    fillColor: 0xFF8ac4d0,
-                    textColor: 0xFF000000,
-                    textSize: 20,
-                    callBack: btnOnClick,
+                    button: '9',
+                    buttonColor: const Color(0x80414141),
+                    charColor: const Color(0xFFFFFFFF),
+                    eventPress: buttonPressed,
                   ),
                   CalculatorButton(
-                    text: 'X',
-                    fillColor: 0xFFf4d160,
-                    textColor: 0xFF000000,
-                    textSize: 20,
-                    callBack: btnOnClick,
+                    button: '*',
+                    buttonColor: const Color(0x80414141),
+                    charColor: const Color(0xFF3ABF15),
+                    eventPress: buttonPressed,
                   ),
                 ],
               ),
@@ -188,32 +159,28 @@ class _FlutterCalculatorState extends State<FlutterCalculator> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   CalculatorButton(
-                    text: '6',
-                    fillColor: 0xFF8ac4d0,
-                    textColor: 0xFF000000,
-                    textSize: 20,
-                    callBack: btnOnClick,
+                    button: '4',
+                    buttonColor: const Color(0x80414141),
+                    charColor: const Color(0xFFFFFFFF),
+                    eventPress: buttonPressed,
                   ),
                   CalculatorButton(
-                    text: '5',
-                    fillColor: 0xFF8ac4d0,
-                    textColor: 0xFF000000,
-                    textSize: 20,
-                    callBack: btnOnClick,
+                    button: '5',
+                    buttonColor: const Color(0x80414141),
+                    charColor: const Color(0xFFFFFFFF),
+                    eventPress: buttonPressed,
                   ),
                   CalculatorButton(
-                    text: '4',
-                    fillColor: 0xFF8ac4d0,
-                    textColor: 0xFF000000,
-                    textSize: 20,
-                    callBack: btnOnClick,
+                    button: '6',
+                    buttonColor: const Color(0x80414141),
+                    charColor: const Color(0xFFFFFFFF),
+                    eventPress: buttonPressed,
                   ),
                   CalculatorButton(
-                    text: '-',
-                    fillColor: 0xFFf4d160,
-                    textColor: 0xFF000000,
-                    textSize: 20,
-                    callBack: btnOnClick,
+                    button: '-',
+                    buttonColor: const Color(0x80414141),
+                    charColor: const Color(0xFF3ABF15),
+                    eventPress: buttonPressed,
                   ),
                 ],
               ),
@@ -221,32 +188,28 @@ class _FlutterCalculatorState extends State<FlutterCalculator> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   CalculatorButton(
-                    text: '3',
-                    fillColor: 0xFF8ac4d0,
-                    textColor: 0xFF000000,
-                    textSize: 20,
-                    callBack: btnOnClick,
+                    button: '1',
+                    buttonColor: const Color(0x80414141),
+                    charColor: const Color(0xFFFFFFFF),
+                    eventPress: buttonPressed,
                   ),
                   CalculatorButton(
-                    text: '2',
-                    fillColor: 0xFF8ac4d0,
-                    textColor: 0xFF000000,
-                    textSize: 20,
-                    callBack: btnOnClick,
+                    button: '2',
+                    buttonColor: const Color(0x80414141),
+                    charColor: const Color(0xFFFFFFFF),
+                    eventPress: buttonPressed,
                   ),
                   CalculatorButton(
-                    text: '1',
-                    fillColor: 0xFF8ac4d0,
-                    textColor: 0xFF000000,
-                    textSize: 20,
-                    callBack: btnOnClick,
+                    button: '3',
+                    buttonColor: const Color(0x80414141),
+                    charColor: const Color(0xFFFFFFFF),
+                    eventPress: buttonPressed,
                   ),
                   CalculatorButton(
-                    text: '+',
-                    fillColor: 0xFFf4d160,
-                    textColor: 0xFF000000,
-                    textSize: 20,
-                    callBack: btnOnClick,
+                    button: '+',
+                    buttonColor: const Color(0x80414141),
+                    charColor: const Color(0xFF3ABF15),
+                    eventPress: buttonPressed,
                   ),
                 ],
               ),
@@ -254,32 +217,29 @@ class _FlutterCalculatorState extends State<FlutterCalculator> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   CalculatorButton(
-                    text: '+/-',
-                    fillColor: 0xFF8ac4d0,
-                    textColor: 0xFF000000,
-                    textSize: 20,
-                    callBack: btnOnClick,
+                    button: '0',
+                    buttonColor: const Color(0x80414141),
+                    charColor: const Color(0xFFFFFFFF),
+                    eventPress: buttonPressed,
                   ),
                   CalculatorButton(
-                    text: '0',
-                    fillColor: 0xFF8ac4d0,
-                    textColor: 0xFF000000,
-                    textSize: 20,
-                    callBack: btnOnClick,
+                    button: '00',
+                    buttonColor: const Color(0x80414141),
+                    charColor: const Color(0xFFFFFFFF),
+                    charSize: 30,
+                    eventPress: buttonPressed,
                   ),
                   CalculatorButton(
-                    text: '00',
-                    fillColor: 0xFF8ac4d0,
-                    textColor: 0xFF000000,
-                    textSize: 20,
-                    callBack: btnOnClick,
+                    button: '.',
+                    buttonColor: const Color(0x80414141),
+                    charColor: const Color(0xFFFFFFFF),
+                    eventPress: buttonPressed,
                   ),
                   CalculatorButton(
-                    text: '=',
-                    fillColor: 0xFFf4d160,
-                    textColor: 0xFF000000,
-                    textSize: 20,
-                    callBack: btnOnClick,
+                    button: '=',
+                    buttonColor: const Color(0xFF3ABF15),
+                    charColor: const Color(0xFF141414),
+                    eventPress: calculation,
                   ),
                 ],
               ),
