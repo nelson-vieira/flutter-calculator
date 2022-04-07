@@ -18,10 +18,6 @@ class _FlutterCalculatorState extends State<FlutterCalculator> {
   String history = '';
   String operation = '';
 
-  void buttonPressed(String button) {
-    setState(() => operation += button);
-  }
-
   void clearOperation(String button) {
     setState(() {
       operation = '';
@@ -33,6 +29,10 @@ class _FlutterCalculatorState extends State<FlutterCalculator> {
       history = '';
       operation = '';
     });
+  }
+
+  void buttonPressed(String button) {
+    setState(() => operation += button);
   }
 
   void calculation(String button) {
