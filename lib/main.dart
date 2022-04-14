@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:math_expressions/math_expressions.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'Widget/CalculatorButton.dart';
+import 'widget/calculator_button.dart';
 
 void main() {
   runApp(const FlutterCalculator());
@@ -90,12 +90,14 @@ class _FlutterCalculatorState extends State<FlutterCalculator> {
                 ),
                 alignment: const Alignment(1.0, 1.0),
               ),
+              // adds a line between the output screen and the user interface
               const Divider(
                 color: Color(0xFFABABAB),
                 height: 1,
                 thickness: 1,
               ),
               const SizedBox(height: 40),
+              // calculator keyboard, divided in rows of buttons
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
